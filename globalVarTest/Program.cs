@@ -20,11 +20,11 @@ namespace globalVarTest
             regular_Time.Enabled = true;
             regular_Time.Interval = 2000;
 
-            t.Add(1, "10");
-            t.Add(2, "20");
-            t.Add(3, "30");
-            t.Add(4, "40");
-            t.Add(5, "50");
+            t.Add(1, "102459.38");
+            t.Add(2, "74931.88");
+            //t.Add(3, "30");
+            //t.Add(4, "40");
+            //t.Add(5, "50");
             
             regular_Time.Start();
             regular_Time.Elapsed += new ElapsedEventHandler(regularTime);
@@ -33,11 +33,21 @@ namespace globalVarTest
 
         static void regularTime(object source, ElapsedEventArgs e)
         {
-            
-            foreach (var temp in t)
+
+            try
             {
-                sum += Convert.ToInt32(temp.Value);
+                foreach (var temp in t)
+                {
+                    //sum += Convert.ToInt32(Convert.ToDouble(temp.Value));
+                    sum += Convert.ToInt32(temp.Value,10);
+                }
             }
+            catch (Exception xe)
+            {
+
+                Console.WriteLine("---将字符串转换成int型出错"+ xe.ToString());
+            }
+            
             Console.WriteLine(sum.ToString());
             sum = 0;
             Console.ReadLine();
